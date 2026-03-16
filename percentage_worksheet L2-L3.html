@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Percentage Power — Math Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #e0f4ff;
+    --navy: #1a2e4a;
+    --coral: #ff6b6b;
+    --mint: #43d9a2;
+    --yellow: #ffd166;
+    --purple: #a855f7;
+    --blue: #3b82f6;
+    --pink: #ec4899;
+    --card: #ffffff;
+    --shadow: 0 4px 20px rgba(26,46,74,0.10);
+    --radius: 18px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #e0f4ff 0%, #fce4ff 50%, #fff8e1 100%);
+    min-height: 100vh;
+    padding: 30px 16px 60px;
+    color: var(--navy);
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeDown .6s ease both;
+  }
+  .header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+  .header p {
+    font-size: 1.05rem;
+    color: #5a7a9a;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+  .stars { font-size: 1.5rem; letter-spacing: 4px; margin-top: 4px; }
+
+  .progress-bar-wrap {
+    background: #dbeafe;
+    border-radius: 999px;
+    height: 14px;
+    max-width: 520px;
+    margin: 18px auto 0;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #a855f7);
+    border-radius: 999px;
+    width: 0%;
+    transition: width .5s ease;
+  }
+  .progress-label {
+    text-align: center;
+    font-size: .88rem;
+    color: #5a7a9a;
+    margin-top: 6px;
+    font-weight: 700;
+  }
+
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 36px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-badge {
+    background: var(--yellow);
+    color: var(--navy);
+    border-radius: 999px;
+    padding: 2px 14px;
+    font-size: .85rem;
+    font-weight: 800;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 28px;
+    max-width: 760px;
+    margin: 0 auto 20px;
+    border: 2.5px solid transparent;
+    transition: border .3s, transform .2s;
+    animation: fadeUp .5s ease both;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card.correct { border-color: var(--mint); background: #f0fff8; }
+  .card.wrong   { border-color: var(--coral); background: #fff5f5; }
+  .card.answered { border-color: var(--blue); }
+
+  .q-number {
+    position: absolute;
+    top: -13px; left: 18px;
+    background: linear-gradient(90deg, #3b82f6, #a855f7);
+    color: #fff;
+    font-size: .78rem;
+    font-weight: 800;
+    padding: 2px 12px;
+    border-radius: 999px;
+    letter-spacing: .5px;
+  }
+
+  .q-text {
+    font-size: 1.03rem;
+    font-weight: 700;
+    line-height: 1.55;
+    margin-bottom: 16px;
+    color: var(--navy);
+  }
+  .q-text .highlight { color: #3b82f6; }
+
+  /* MCQ */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    background: #f1f5ff;
+    border: 2.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 11px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-size: .97rem;
+    font-weight: 700;
+    color: var(--navy);
+    cursor: pointer;
+    text-align: left;
+    transition: all .2s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .option-btn:hover:not(:disabled) { background: #dbeafe; border-color: #3b82f6; }
+  .option-btn.selected { background: #e0e7ff; border-color: #a855f7; }
+  .option-btn.correct-ans { background: #d1fae5; border-color: var(--mint); color: #065f46; }
+  .option-btn.wrong-ans   { background: #fee2e2; border-color: var(--coral); color: #991b1b; }
+  .option-btn:disabled { cursor: default; }
+  .opt-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #dbeafe;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 800; flex-shrink: 0;
+    color: #3b82f6;
+  }
+  .option-btn.selected .opt-letter { background: #a855f7; color: #fff; border-color: #a855f7; }
+  .option-btn.correct-ans .opt-letter { background: var(--mint); color: #fff; border-color: var(--mint); }
+  .option-btn.wrong-ans .opt-letter   { background: var(--coral); color: #fff; border-color: var(--coral); }
+
+  /* Numerical input */
+  .num-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .num-input {
+    border: 2.5px solid #dbeafe;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    width: 120px;
+    color: var(--navy);
+    outline: none;
+    transition: border .2s;
+    background: #f8fbff;
+  }
+  .num-input:focus { border-color: #a855f7; }
+  .num-input:disabled { background: #f1f5ff; }
+  .unit-label {
+    font-size: .97rem; font-weight: 700; color: #5a7a9a;
+  }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: .95rem;
+    font-weight: 700;
+    display: none;
+  }
+  .feedback.show { display: block; animation: popIn .3s ease both; }
+  .feedback.ok  { background: #d1fae5; color: #065f46; border-left: 4px solid var(--mint); }
+  .feedback.bad { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--coral); }
+
+  /* Submit all */
+  .submit-area {
+    max-width: 760px;
+    margin: 10px auto 0;
+    text-align: center;
+  }
+  .submit-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 16px 48px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(59,130,246,.35);
+    transition: transform .2s, box-shadow .2s;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(59,130,246,.4); }
+  .submit-btn:disabled { opacity: .5; cursor: default; transform: none; }
+  .submit-note { font-size: .87rem; color: #7a9abf; margin-top: 8px; font-weight: 600; }
+
+  /* Score panel */
+  #score-panel {
+    display: none;
+    max-width: 760px;
+    margin: 28px auto 0;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 32px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: popIn .5s ease both;
+    border: 3px solid var(--yellow);
+  }
+  #score-panel h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  .score-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #a855f7);
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 16px auto;
+    box-shadow: 0 6px 24px rgba(168,85,247,.3);
+  }
+  .score-msg { font-size: 1.1rem; font-weight: 700; color: #5a7a9a; }
+  .score-breakdown { margin-top: 18px; font-size: .95rem; color: var(--navy); font-weight: 600; }
+
+  .confetti-emoji { font-size: 2rem; }
+
+  @keyframes fadeDown { from { opacity:0; transform: translateY(-20px); } to { opacity:1; transform: none; } }
+  @keyframes fadeUp   { from { opacity:0; transform: translateY(24px); }  to { opacity:1; transform: none; } }
+  @keyframes popIn    { from { opacity:0; transform: scale(.88); } to { opacity:1; transform: scale(1); } }
+
+  .emoji-icon { font-size: 1.3rem; }
+
+  @media (max-width: 520px) {
+    .card { padding: 20px 16px; }
+    .num-input { width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="stars">⭐ ✨ 🎯 ✨ ⭐</div>
+  <h1>Percentage Power!</h1>
+  <p>Grade 7 Math Worksheet • Answer all questions to unlock your score 🚀</p>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-label" id="progressLabel">0 of 18 answered</div>
+</div>
+
+<!-- SECTION A -->
+<div class="section-title"><span class="section-badge">Section A</span><span>🔢 Find the Number</span></div>
+
+<!-- Q1 -->
+<div class="card" id="card-1" style="animation-delay:.05s">
+  <div class="q-number">Q1</div>
+  <div class="q-text">Find the number whose <span class="highlight">120%</span> is <span class="highlight">72</span>.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q1" placeholder="?" oninput="markAnswered(1)">
+  </div>
+  <div class="feedback" id="fb1"></div>
+</div>
+
+<!-- Q2a -->
+<div class="card" id="card-2" style="animation-delay:.08s">
+  <div class="q-number">Q2</div>
+  <div class="q-text"><span class="highlight">27.5%</span> of _____ is <span class="highlight">13.75</span>.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q2" placeholder="?" oninput="markAnswered(2)">
+  </div>
+  <div class="feedback" id="fb2"></div>
+</div>
+
+<!-- Q2b -->
+<div class="card" id="card-3" style="animation-delay:.11s">
+  <div class="q-number">Q3</div>
+  <div class="q-text"><span class="highlight">42%</span> of _____ is <span class="highlight">31.5</span>.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q3" placeholder="?" oninput="markAnswered(3)">
+  </div>
+  <div class="feedback" id="fb3"></div>
+</div>
+
+<!-- Q4 -->
+<div class="card" id="card-4" style="animation-delay:.14s">
+  <div class="q-number">Q4</div>
+  <div class="q-text"><span class="highlight">60</span> is <span class="highlight">15%</span> of _____.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q4" placeholder="?" oninput="markAnswered(4)">
+  </div>
+  <div class="feedback" id="fb4"></div>
+</div>
+
+<!-- Q5 -->
+<div class="card" id="card-5" style="animation-delay:.17s">
+  <div class="q-number">Q5</div>
+  <div class="q-text"><span class="highlight">60</span> is <span class="highlight">20%</span> of _____.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q5" placeholder="?" oninput="markAnswered(5)">
+  </div>
+  <div class="feedback" id="fb5"></div>
+</div>
+
+<!-- SECTION B -->
+<div class="section-title"><span class="section-badge">Section B</span><span>🌍 Word Problems</span></div>
+
+<!-- Q6 -->
+<div class="card" id="card-6" style="animation-delay:.2s">
+  <div class="q-number">Q6</div>
+  <div class="q-text">🚌 Ryan takes <span class="highlight">40 mins</span> to reach his office by bus. He saves <span class="highlight">35%</span> of his time if he takes a cab. Find the time taken by the cab.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q6" placeholder="?" oninput="markAnswered(6)">
+    <span class="unit-label">mins</span>
+  </div>
+  <div class="feedback" id="fb6"></div>
+</div>
+
+<!-- Q7 -->
+<div class="card" id="card-7" style="animation-delay:.23s">
+  <div class="q-number">Q7</div>
+  <div class="q-text">💻 A store sells each laptop for <span class="highlight">$224</span>, which is <span class="highlight">64%</span> of its original price. Find the original cost of a laptop.</div>
+  <div class="num-wrap">
+    <span class="unit-label">$</span>
+    <input class="num-input" type="number" id="q7" placeholder="?" oninput="markAnswered(7)">
+  </div>
+  <div class="feedback" id="fb7"></div>
+</div>
+
+<!-- Q8 -->
+<div class="card" id="card-8" style="animation-delay:.26s">
+  <div class="q-number">Q8</div>
+  <div class="q-text">📚 After reading a novel for <span class="highlight">3 hours</span>, Sam could finish only <span class="highlight">15%</span> of it. How much total time does he need to finish the novel from the start?</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q8" placeholder="?" oninput="markAnswered(8)">
+    <span class="unit-label">hours</span>
+  </div>
+  <div class="feedback" id="fb8"></div>
+</div>
+
+<!-- Q9 -->
+<div class="card" id="card-9" style="animation-delay:.29s">
+  <div class="q-number">Q9</div>
+  <div class="q-text">📱 Tia got an offer: <span class="highlight">35% off</span> the tag price of a cell phone. She saved <span class="highlight">$140</span>. What was the original tag price?</div>
+  <div class="num-wrap">
+    <span class="unit-label">$</span>
+    <input class="num-input" type="number" id="q9" placeholder="?" oninput="markAnswered(9)">
+  </div>
+  <div class="feedback" id="fb9"></div>
+</div>
+
+<!-- Q10 -->
+<div class="card" id="card-10" style="animation-delay:.32s">
+  <div class="q-number">Q10</div>
+  <div class="q-text">🎨 Dyna made <span class="highlight">112 ornaments</span> this month, achieving <span class="highlight">80%</span> of her monthly target. By how much would she <b>exceed or fall short</b> of her target if she makes <span class="highlight">130 ornaments</span>?</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q10" placeholder="?" oninput="markAnswered(10)">
+    <span class="unit-label">ornaments</span>
+  </div>
+  <div class="feedback" id="fb10"></div>
+</div>
+
+<!-- Q11 -->
+<div class="card" id="card-11" style="animation-delay:.35s">
+  <div class="q-number">Q11</div>
+  <div class="q-text">🏫 In a school, <span class="highlight">45%</span> of total students are girls. If there are <span class="highlight">360 girls</span>, find the total number of students.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q11" placeholder="?" oninput="markAnswered(11)">
+    <span class="unit-label">students</span>
+  </div>
+  <div class="feedback" id="fb11"></div>
+</div>
+
+<!-- SECTION C -->
+<div class="section-title"><span class="section-badge">Section C</span><span>📊 Express as Percentage</span></div>
+
+<!-- Q12 -->
+<div class="card" id="card-12" style="animation-delay:.38s">
+  <div class="q-number">Q12</div>
+  <div class="q-text">Express <span class="highlight">72</span> out of <span class="highlight">90</span> as a percentage.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q12" placeholder="?" oninput="markAnswered(12)">
+    <span class="unit-label">%</span>
+  </div>
+  <div class="feedback" id="fb12"></div>
+</div>
+
+<!-- Q13 -->
+<div class="card" id="card-13" style="animation-delay:.41s">
+  <div class="q-number">Q13</div>
+  <div class="q-text">Express <span class="highlight">45</span> out of <span class="highlight">75</span> as a percentage.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q13" placeholder="?" oninput="markAnswered(13)">
+    <span class="unit-label">%</span>
+  </div>
+  <div class="feedback" id="fb13"></div>
+</div>
+
+<!-- Q14 -->
+<div class="card" id="card-14" style="animation-delay:.44s">
+  <div class="q-number">Q14</div>
+  <div class="q-text">Express <span class="highlight">16</span> out of <span class="highlight">25</span> as a percentage.</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q14" placeholder="?" oninput="markAnswered(14)">
+    <span class="unit-label">%</span>
+  </div>
+  <div class="feedback" id="fb14"></div>
+</div>
+
+<!-- SECTION D -->
+<div class="section-title"><span class="section-badge">Section D</span><span>🧠 Mixed Challenges</span></div>
+
+<!-- Q15 -->
+<div class="card" id="card-15" style="animation-delay:.47s">
+  <div class="q-number">Q15</div>
+  <div class="q-text">🔩 A metal bar contains <span class="highlight">32% brass</span> and <span class="highlight">29% iron</span>. What percent is aluminium?</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q15" placeholder="?" oninput="markAnswered(15)">
+    <span class="unit-label">%</span>
+  </div>
+  <div class="feedback" id="fb15"></div>
+</div>
+
+<!-- Q16 -->
+<div class="card" id="card-16" style="animation-delay:.50s">
+  <div class="q-number">Q16</div>
+  <div class="q-text">🏢 An office has <span class="highlight">60%</span> for common seating and <span class="highlight">25%</span> for cabins. What percentage is used for Pantry?</div>
+  <div class="num-wrap">
+    <input class="num-input" type="number" id="q16" placeholder="?" oninput="markAnswered(16)">
+    <span class="unit-label">%</span>
+  </div>
+  <div class="feedback" id="fb16"></div>
+</div>
+
+<!-- Q17 - MCQ -->
+<div class="card" id="card-17" style="animation-delay:.53s">
+  <div class="q-number">Q17</div>
+  <div class="q-text">🐻 In a zoo, <span class="highlight">40%</span> of total animals are bears. <span class="highlight">25%</span> of those bears are brown bears. What percentage of total animals are brown bears?</div>
+  <div class="options" id="opts-17">
+    <button class="option-btn" onclick="selectOption(17, 'A', '10')" id="17-A"><span class="opt-letter">A</span>10%</button>
+    <button class="option-btn" onclick="selectOption(17, 'B', '15')" id="17-B"><span class="opt-letter">B</span>15%</button>
+    <button class="option-btn" onclick="selectOption(17, 'C', '20')" id="17-C"><span class="opt-letter">C</span>20%</button>
+    <button class="option-btn" onclick="selectOption(17, 'D', '25')" id="17-D"><span class="opt-letter">D</span>25%</button>
+  </div>
+  <div class="feedback" id="fb17"></div>
+</div>
+
+<!-- Q18 - MCQ -->
+<div class="card" id="card-18" style="animation-delay:.56s">
+  <div class="q-number">Q18</div>
+  <div class="q-text">💍 A jeweler charges <span class="highlight">$12</span> as a making charge per gram of gold. The cost of 1 gram of gold is <span class="highlight">$60</span>. What percentage of the gold price is the making charge?</div>
+  <div class="options" id="opts-18">
+    <button class="option-btn" onclick="selectOption(18, 'A', '10')" id="18-A"><span class="opt-letter">A</span>10%</button>
+    <button class="option-btn" onclick="selectOption(18, 'B', '15')" id="18-B"><span class="opt-letter">B</span>15%</button>
+    <button class="option-btn" onclick="selectOption(18, 'C', '20')" id="18-C"><span class="opt-letter">C</span>20%</button>
+    <button class="option-btn" onclick="selectOption(18, 'D', '25')" id="18-D"><span class="opt-letter">D</span>25%</button>
+  </div>
+  <div class="feedback" id="fb18"></div>
+</div>
+
+<!-- Bonus MCQ from last image -->
+<div class="card" id="card-19" style="animation-delay:.59s">
+  <div class="q-number">Bonus</div>
+  <div class="q-text">🌟 What percentage of <span class="highlight">80</span> is <span class="highlight">4</span>?</div>
+  <div class="options" id="opts-19">
+    <button class="option-btn" onclick="selectOption(19, 'A', '2')" id="19-A"><span class="opt-letter">A</span>2%</button>
+    <button class="option-btn" onclick="selectOption(19, 'B', '5')" id="19-B"><span class="opt-letter">B</span>5%</button>
+    <button class="option-btn" onclick="selectOption(19, 'C', '20')" id="19-C"><span class="opt-letter">C</span>20%</button>
+    <button class="option-btn" onclick="selectOption(19, 'D', '50')" id="19-D"><span class="opt-letter">D</span>50%</button>
+  </div>
+  <div class="feedback" id="fb19"></div>
+</div>
+
+<!-- Ratio-based MCQ -->
+<div class="card" id="card-20" style="animation-delay:.62s">
+  <div class="q-number">Q19</div>
+  <div class="q-text">🏙️ In a society, the ratio of men to women is <span class="highlight">3 : 2</span>. The ratio of working women to non-working women is <span class="highlight">4 : 1</span>. Find the percentage of non-working women in the society.</div>
+  <div class="options" id="opts-20">
+    <button class="option-btn" onclick="selectOption(20, 'A', '8')" id="20-A"><span class="opt-letter">A</span>8%</button>
+    <button class="option-btn" onclick="selectOption(20, 'B', '16')" id="20-B"><span class="opt-letter">B</span>16%</button>
+    <button class="option-btn" onclick="selectOption(20, 'C', '20')" id="20-C"><span class="opt-letter">C</span>20%</button>
+    <button class="option-btn" onclick="selectOption(20, 'D', '40')" id="20-D"><span class="opt-letter">D</span>40%</button>
+  </div>
+  <div class="feedback" id="fb20"></div>
+</div>
+
+<!-- Submit -->
+<div class="submit-area" style="margin-top:28px;">
+  <button class="submit-btn" id="submitBtn" onclick="submitAll()">
+    🎯 Submit &amp; See My Score!
+  </button>
+  <div class="submit-note" id="submitNote">Answer all questions to submit ✏️</div>
+</div>
+
+<!-- Score panel -->
+<div id="score-panel">
+  <div class="confetti-emoji">🎉 🥳 🎊</div>
+  <h2>Here's Your Score!</h2>
+  <div class="score-circle" id="scoreCircle"></div>
+  <div class="score-msg" id="scoreMsg"></div>
+  <div class="score-breakdown" id="scoreBreakdown"></div>
+</div>
+
+<script>
+// Correct answers
+const ANSWERS = {
+  1: 60,
+  2: 50,
+  3: 75,
+  4: 400,
+  5: 300,
+  6: 26,
+  7: 350,
+  8: 20,
+  9: 400,
+  10: 10,   // target=140, 130 falls short by 10
+  11: 800,
+  12: 80,
+  13: 60,
+  14: 64,
+  15: 39,
+  16: 15,
+};
+
+const MCQ_ANSWERS = {
+  17: 'A',  // 40% * 25% = 10%
+  18: 'C',  // 12/60 * 100 = 20%
+  19: 'B',  // 4/80 * 100 = 5%
+  20: 'A',  // women = 2/5 total, non-working = 1/5 of women = 2/25 total = 8%
+};
+
+const SOLUTIONS = {
+  1:  "120% of x = 72 → x = 72 ÷ 1.20 = <b>60</b>",
+  2:  "27.5% of x = 13.75 → x = 13.75 ÷ 0.275 = <b>50</b>",
+  3:  "42% of x = 31.5 → x = 31.5 ÷ 0.42 = <b>75</b>",
+  4:  "60 = 15% of x → x = 60 ÷ 0.15 = <b>400</b>",
+  5:  "60 = 20% of x → x = 60 ÷ 0.20 = <b>300</b>",
+  6:  "Time saved = 35% of 40 = 14 min → Cab time = 40 − 14 = <b>26 mins</b>",
+  7:  "64% of x = 224 → x = 224 ÷ 0.64 = <b>$350</b>",
+  8:  "3 hrs = 15% → Total = 3 ÷ 0.15 = <b>20 hours</b>",
+  9:  "35% of x = 140 → x = 140 ÷ 0.35 = <b>$400</b>",
+  10: "Target = 112 ÷ 0.80 = 140. She makes 130, so she falls short by 140 − 130 = <b>10 ornaments</b>",
+  11: "45% of x = 360 → x = 360 ÷ 0.45 = <b>800 students</b>",
+  12: "(72 ÷ 90) × 100 = <b>80%</b>",
+  13: "(45 ÷ 75) × 100 = <b>60%</b>",
+  14: "(16 ÷ 25) × 100 = <b>64%</b>",
+  15: "100% − 32% − 29% = <b>39% aluminium</b>",
+  16: "100% − 60% − 25% = <b>15% Pantry</b>",
+  17: "40% × 25% = 0.40 × 0.25 = 0.10 = <b>10%</b>",
+  18: "(12 ÷ 60) × 100 = <b>20%</b>",
+  19: "(4 ÷ 80) × 100 = <b>5%</b>",
+  20: "Total = 5 parts. Women = 2 parts. Non-working women = 1/5 of 2 parts = 2/25 total = <b>8%</b>",
+};
+
+const TOTAL = 20;
+let answered = {};
+let mcqSelected = {};
+let submitted = false;
+
+const numericQs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+const mcqQs = [17,18,19,20];
+
+function markAnswered(q) {
+  if (submitted) return;
+  const val = document.getElementById('q' + q).value.trim();
+  if (val !== '') answered[q] = val;
+  else delete answered[q];
+  updateProgress();
+}
+
+function selectOption(q, letter, val) {
+  if (submitted) return;
+  mcqSelected[q] = { letter, val };
+  answered[q] = letter;
+  document.querySelectorAll(`#opts-${q} .option-btn`).forEach(b => b.classList.remove('selected'));
+  document.getElementById(`${q}-${letter}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const count = Object.keys(answered).length;
+  const pct = Math.round((count / TOTAL) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' answered';
+  const btn = document.getElementById('submitBtn');
+  const note = document.getElementById('submitNote');
+  if (count === TOTAL) {
+    btn.disabled = false;
+    note.textContent = "Great! You've answered everything — go for it! 🚀";
+  } else {
+    btn.disabled = false; // allow partial submit for UX
+    note.textContent = `${TOTAL - count} question(s) still unanswered ✏️`;
+  }
+}
+
+function submitAll() {
+  if (submitted) return;
+  submitted = true;
+  document.getElementById('submitBtn').disabled = true;
+
+  let correct = 0;
+
+  // Numeric
+  numericQs.forEach(q => {
+    const input = document.getElementById('q' + q);
+    const userVal = parseFloat(input.value);
+    const correctVal = ANSWERS[q];
+    const fb = document.getElementById('fb' + q);
+    const card = document.getElementById('card-' + q);
+    input.disabled = true;
+    if (!isNaN(userVal) && Math.abs(userVal - correctVal) < 0.01) {
+      fb.className = 'feedback show ok';
+      fb.innerHTML = '✅ Correct! ' + SOLUTIONS[q];
+      card.classList.add('correct');
+      correct++;
+    } else {
+      fb.className = 'feedback show bad';
+      fb.innerHTML = '❌ ' + (isNaN(userVal) ? 'Not answered. ' : `Your answer: ${userVal}. `) + 'Solution: ' + SOLUTIONS[q];
+      card.classList.add('wrong');
+    }
+  });
+
+  // MCQ
+  mcqQs.forEach(q => {
+    const sel = mcqSelected[q];
+    const correctLetter = MCQ_ANSWERS[q];
+    const fb = document.getElementById('fb' + q);
+    const card = document.getElementById('card-' + q);
+    document.querySelectorAll(`#opts-${q} .option-btn`).forEach(b => b.disabled = true);
+
+    // highlight correct
+    document.getElementById(`${q}-${correctLetter}`).classList.add('correct-ans');
+
+    if (sel && sel.letter === correctLetter) {
+      fb.className = 'feedback show ok';
+      fb.innerHTML = '✅ Correct! ' + SOLUTIONS[q];
+      card.classList.add('correct');
+      correct++;
+    } else {
+      if (sel) document.getElementById(`${q}-${sel.letter}`).classList.add('wrong-ans');
+      fb.className = 'feedback show bad';
+      fb.innerHTML = '❌ ' + (sel ? `You chose ${sel.letter}. ` : 'Not answered. ') + 'Solution: ' + SOLUTIONS[q];
+      card.classList.add('wrong');
+    }
+  });
+
+  // Show score
+  const panel = document.getElementById('score-panel');
+  panel.style.display = 'block';
+  document.getElementById('scoreCircle').textContent = correct + '/' + TOTAL;
+  const pct = Math.round((correct / TOTAL) * 100);
+  let msg = '';
+  let emoji = '';
+  if (pct === 100) { msg = "PERFECT SCORE! You are a Percentage Superstar! 🌟"; emoji = "🏆"; }
+  else if (pct >= 80) { msg = "Excellent work! Almost perfect! Keep it up! 🎉"; emoji = "🥇"; }
+  else if (pct >= 60) { msg = "Good effort! Review the ones you got wrong and try again! 💪"; emoji = "🥈"; }
+  else { msg = "Keep practicing! You've got this — review the solutions above! 📖"; emoji = "💡"; }
+  document.getElementById('scoreMsg').innerHTML = emoji + ' ' + msg;
+  document.getElementById('scoreBreakdown').innerHTML = `✅ Correct: <b>${correct}</b> &nbsp;|&nbsp; ❌ Wrong: <b>${TOTAL - correct}</b> &nbsp;|&nbsp; 📊 ${pct}%`;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// init
+document.getElementById('submitBtn').disabled = false;
+updateProgress();
+</script>
+</body>
+</html>
