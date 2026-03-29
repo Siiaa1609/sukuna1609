@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 10 – Parabola Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f9f5;
+  --cream2: #eaf2ea;
+  --ink: #0e1a0e;
+  --green: #1a5c2a;
+  --teal: #0e4a4a;
+  --rule: #c8dcc8;
+  --rule2: #deeede;
+  --margin-line: #a0d0a8;
+  --gold: #7a9a1a;
+  --light-green: rgba(26,92,42,0.08);
+  --light-teal: rgba(14,74,74,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #b8c8b8;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: var(--ink);
+  padding: 28px 16px 60px;
+}
+
+.sheet {
+  background: var(--cream);
+  max-width: 860px;
+  margin: 0 auto 48px;
+  position: relative;
+  box-shadow: 3px 3px 0 #9aaa9a, 7px 7px 0 #88988a;
+}
+
+.sheet::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 33px,
+    var(--rule2) 33px, var(--rule2) 34px
+  );
+  pointer-events: none; z-index: 0;
+}
+
+.sheet::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: 76px;
+  width: 2px; background: var(--margin-line); opacity: .65; z-index: 1;
+}
+
+.inner {
+  position: relative; z-index: 2;
+  padding: 38px 52px 52px 96px;
+}
+
+/* Header */
+.ws-header {
+  margin-bottom: 24px;
+  border-bottom: 3px double var(--ink);
+  padding-bottom: 16px;
+}
+.ws-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 9.5px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 5px;
+}
+.ws-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 38px; line-height: 1.05; color: var(--ink);
+}
+.ws-title em { color: var(--teal); font-style: italic; }
+.ws-subtitle {
+  font-size: 12.5px; color: #555; margin-top: 4px; font-style: italic;
+}
+.meta-bar { display: flex; gap: 36px; margin-top: 16px; flex-wrap: wrap; }
+.mf { display: flex; flex-direction: column; gap: 3px; }
+.mf-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold);
+}
+.mf-line { width: 160px; border-bottom: 1.5px solid var(--ink); height: 20px; }
+.mf-line.short { width: 90px; }
+
+/* Formula box */
+.ref-box {
+  border: 1.5px solid var(--ink);
+  padding: 13px 16px;
+  margin-bottom: 24px;
+  position: relative;
+  background: rgba(255,255,255,.35);
+}
+.ref-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 11px; font-style: italic;
+  background: var(--cream);
+  position: absolute; top: -9px; left: 10px;
+  padding: 0 6px; color: var(--teal);
+}
+.ref-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 7px 28px; margin-top: 4px;
+}
+.ref-item { font-size: 12px; line-height: 1.7; font-family: 'Courier Prime', monospace; }
+.ref-item b { color: var(--teal); font-weight: 700; }
+
+/* Section heading */
+.sec-head {
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px; color: var(--teal);
+  border-top: 2px solid var(--teal);
+  border-bottom: 1px solid var(--teal);
+  padding: 5px 0 5px 2px;
+  margin: 32px 0 20px;
+  letter-spacing: .04em;
+}
+
+/* Problem */
+.problem { margin-bottom: 34px; }
+.prob-top { display: flex; align-items: baseline; gap: 11px; margin-bottom: 8px; }
+.pnum {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--green); min-width: 30px; line-height: 1;
+}
+.ptag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--teal); background: var(--light-teal);
+  padding: 2px 8px; border-radius: 2px;
+}
+.ppts {
+  margin-left: auto;
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px; color: #aaa;
+}
+.ptext { font-size: 13.5px; line-height: 1.72; margin-bottom: 7px; padding-left: 2px; }
+.ptext strong { color: var(--teal); }
+
+.eq {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 16px;
+  background: var(--light-green);
+  border: 1px solid rgba(26,92,42,.18);
+  display: inline-block;
+  padding: 5px 14px; margin: 6px 0;
+  border-radius: 2px; color: var(--ink);
+}
+
+.work {
+  border: 1.5px solid var(--rule);
+  border-radius: 2px; overflow: hidden; margin-top: 9px;
+}
+.work-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 8px; letter-spacing: .2em; text-transform: uppercase;
+  color: #bbb; padding: 4px 10px;
+  border-bottom: 1px solid var(--rule2);
+  background: rgba(255,255,255,.3);
+}
+.wlines { padding: 3px 10px 5px; }
+.wl { height: 33px; border-bottom: 1px solid var(--rule2); }
+.wl:last-child { border-bottom: none; }
+
+.ans-row {
+  display: flex; flex-wrap: wrap; gap: 10px 28px;
+  margin-top: 9px; padding: 9px 12px;
+  border: 1.5px dashed var(--rule);
+  border-radius: 2px;
+  font-size: 12px; color: #bbb;
+  font-family: 'Courier Prime', monospace;
+  letter-spacing: .04em;
+}
+.ans-row span { white-space: nowrap; }
+.ans-row span::after {
+  content: '_______________';
+  display: inline-block; margin-left: 4px; letter-spacing: .1em;
+}
+.ans-single {
+  margin-top: 9px; padding: 9px 12px;
+  border: 1.5px dashed var(--rule);
+  min-height: 48px;
+  font-size: 11px; color: #ccc;
+  font-family: 'Courier Prime', monospace;
+}
+.ans-single::before { content: 'Equation: ___________________________________'; }
+
+.score-bar {
+  display: flex; justify-content: flex-end; align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 28px;
+}
+.slabel {
+  font-family: 'Courier Prime', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #aaa;
+}
+.sbox {
+  border: 2px solid var(--ink); width: 100px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 14px; color: #ccc;
+}
+
+/* ===== ANSWER KEY ===== */
+.key-sheet { background: #eaf2ea; }
+.key-sheet::before {
+  background-image: repeating-linear-gradient(
+    to bottom, transparent 0, transparent 33px,
+    #d8ead8 33px, #d8ead8 34px
+  );
+}
+.key-header {
+  border-bottom: 3px double var(--green);
+  padding-bottom: 12px; margin-bottom: 24px;
+}
+.key-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px; color: var(--green); font-style: italic;
+}
+.key-header p { font-size: 11.5px; color: #888; margin-top: 3px; font-style: italic; }
+
+.sol { margin-bottom: 22px; }
+.sol-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px; color: var(--green); margin-bottom: 5px;
+}
+.sol-line {
+  font-size: 13px; line-height: 1.9;
+  padding-left: 10px;
+  border-left: 3px solid var(--rule2);
+  margin-bottom: 4px;
+}
+.sol-line b { color: var(--teal); }
+.sol-eq {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 14px;
+  background: var(--light-teal);
+  display: inline-block;
+  padding: 2px 11px; margin: 2px 0; border-radius: 2px;
+}
+.sol-box {
+  display: inline-block;
+  background: var(--light-green);
+  border: 1.5px solid rgba(26,92,42,.3);
+  padding: 5px 14px; margin-top: 5px;
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 15.5px; color: var(--green);
+  border-radius: 2px;
+}
+.kdiv { border: none; border-top: 1px dashed var(--rule); margin: 16px 0; }
+
+.key-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; }
+@media (max-width: 620px) { .key-cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     WORKSHEET
+     ========================================================= -->
+<div class="sheet">
+<div class="inner">
+
+  <div class="ws-header">
+    <div class="ws-tag">Mathematics · Grade 10 · Conic Sections · Chapter 7</div>
+    <div class="ws-title">Parabolas — <em>Practice Worksheet</em></div>
+    <div class="ws-subtitle">Topics: Standard form · Vertex, focus &amp; directrix · Axis of symmetry · Completing the square · Writing equations · Applications</div>
+    <div class="meta-bar">
+      <div class="mf"><div class="mf-label">Student Name</div><div class="mf-line"></div></div>
+      <div class="mf"><div class="mf-label">Date</div><div class="mf-line short"></div></div>
+      <div class="mf"><div class="mf-label">Section / Roll No.</div><div class="mf-line short"></div></div>
+    </div>
+  </div>
+
+  <!-- Formula Reference -->
+  <div class="ref-box">
+    <div class="ref-title">Key Formulas &amp; Definitions</div>
+    <div class="ref-grid">
+      <div class="ref-item"><b>Vertical (up/down):</b>  (x−h)² = 4p(y−k)</div>
+      <div class="ref-item"><b>Horizontal (left/right):</b>  (y−k)² = 4p(x−h)</div>
+      <div class="ref-item"><b>Vertex:</b> (h, k) &nbsp;·&nbsp; <b>Focus:</b> p units from vertex</div>
+      <div class="ref-item"><b>Directrix:</b> perpendicular to axis, p units opposite focus</div>
+      <div class="ref-item"><b>Opens up:</b> p &gt; 0 &nbsp;·&nbsp; <b>Opens down:</b> p &lt; 0</div>
+      <div class="ref-item"><b>Opens right:</b> p &gt; 0 &nbsp;·&nbsp; <b>Opens left:</b> p &lt; 0</div>
+      <div class="ref-item"><b>Latus Rectum length:</b> |4p|</div>
+      <div class="ref-item"><b>Axis of symmetry (vert.):</b> x = h</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION A ===== -->
+  <div class="sec-head">Section A — Identify Key Features from Standard Form &nbsp;(Problems 1–4)</div>
+
+  <!-- P1 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">1</div>
+      <div class="ptag">Vertical Parabola — Origin</div>
+      <div class="ppts">4 pts</div>
+    </div>
+    <div class="ptext">Find the <strong>vertex, focus, directrix, axis of symmetry,</strong> and state the <strong>direction of opening</strong>.</div>
+    <div class="eq">x² = 12y</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Vertex</span><span>p</span><span>Focus</span><span>Directrix</span><span>Axis</span><span>Opens</span>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">2</div>
+      <div class="ptag">Horizontal Parabola — Origin</div>
+      <div class="ppts">4 pts</div>
+    </div>
+    <div class="ptext">Find the <strong>vertex, focus, directrix,</strong> and <strong>length of the latus rectum</strong>.</div>
+    <div class="eq">y² = −20x</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Vertex</span><span>p</span><span>Focus</span><span>Directrix</span><span>Latus Rectum</span><span>Opens</span>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">3</div>
+      <div class="ptag">Shifted — Vertical</div>
+      <div class="ppts">5 pts</div>
+    </div>
+    <div class="ptext">Find the <strong>vertex, focus, directrix, axis of symmetry,</strong> and <strong>latus rectum length</strong>.</div>
+    <div class="eq">(x − 3)² = 8(y + 2)</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Vertex</span><span>p</span><span>Focus</span><span>Directrix</span><span>Axis</span><span>Latus Rectum</span>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">4</div>
+      <div class="ptag">Shifted — Horizontal</div>
+      <div class="ppts">5 pts</div>
+    </div>
+    <div class="ptext">Identify all key features: <strong>vertex, focus, directrix, axis of symmetry,</strong> and <strong>direction of opening</strong>.</div>
+    <div class="eq">(y + 4)² = −12(x − 1)</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Vertex</span><span>p</span><span>Focus</span><span>Directrix</span><span>Axis</span><span>Opens</span>
+    </div>
+  </div>
+
+  <!-- ===== SECTION B ===== -->
+  <div class="sec-head">Section B — Write the Equation &nbsp;(Problems 5–7)</div>
+
+  <!-- P5 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">5</div>
+      <div class="ptag">Given Vertex &amp; Focus</div>
+      <div class="ppts">4 pts</div>
+    </div>
+    <div class="ptext">Write the standard form equation of the parabola with <strong>vertex at the origin</strong> and <strong>focus at (0, −4)</strong>.</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-single"></div>
+  </div>
+
+  <!-- P6 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">6</div>
+      <div class="ptag">Given Vertex &amp; Directrix</div>
+      <div class="ppts">5 pts</div>
+    </div>
+    <div class="ptext">Write the standard form equation of the parabola with <strong>vertex (2, 5)</strong> and <strong>directrix y = 2</strong>.</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-single"></div>
+  </div>
+
+  <!-- P7 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">7</div>
+      <div class="ptag">Given Focus &amp; Directrix</div>
+      <div class="ppts">5 pts</div>
+    </div>
+    <div class="ptext">A parabola has <strong>focus (−1, 3)</strong> and <strong>directrix x = 5</strong>. Write its standard form equation and state the vertex.</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Vertex</span><span>Equation</span>
+    </div>
+  </div>
+
+  <!-- ===== SECTION C ===== -->
+  <div class="sec-head">Section C — Complete the Square &nbsp;(Problems 8–9)</div>
+
+  <!-- P8 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">8</div>
+      <div class="ptag">Complete the Square</div>
+      <div class="ppts">6 pts</div>
+    </div>
+    <div class="ptext">Convert to standard form. Then state the <strong>vertex, focus,</strong> and <strong>directrix</strong>.</div>
+    <div class="eq">x² − 6x − 8y + 1 = 0</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Standard Form</span><span>Vertex</span><span>Focus</span><span>Directrix</span>
+    </div>
+  </div>
+
+  <!-- P9 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">9</div>
+      <div class="ptag">Complete the Square</div>
+      <div class="ppts">6 pts</div>
+    </div>
+    <div class="ptext">Convert to standard form. Identify <strong>vertex, focus, directrix,</strong> and <strong>axis of symmetry</strong>.</div>
+    <div class="eq">y² + 10y − 4x + 9 = 0</div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Standard Form</span><span>Vertex</span><span>Focus</span><span>Directrix</span><span>Axis</span>
+    </div>
+  </div>
+
+  <!-- ===== SECTION D ===== -->
+  <div class="sec-head">Section D — Application &amp; Word Problems &nbsp;(Problems 10–12)</div>
+
+  <!-- P10 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">10</div>
+      <div class="ptag">True / False + Justify</div>
+      <div class="ppts">3 pts</div>
+    </div>
+    <div class="ptext">Circle <strong>TRUE</strong> or <strong>FALSE</strong> and give a one-sentence justification for each.</div>
+    <div style="margin-top:9px; font-size:13px; line-height:2.3; padding-left:4px;">
+      <div>(a) &nbsp;TRUE &nbsp;/&nbsp; FALSE &nbsp;— The vertex of a parabola is always the midpoint of the focus and the foot of the directrix.</div>
+      <div>(b) &nbsp;TRUE &nbsp;/&nbsp; FALSE &nbsp;— A parabola can have two axes of symmetry.</div>
+      <div>(c) &nbsp;TRUE &nbsp;/&nbsp; FALSE &nbsp;— The latus rectum passes through the focus and is perpendicular to the axis of symmetry.</div>
+    </div>
+    <div class="work"><div class="work-lbl">Justifications</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+  </div>
+
+  <!-- P11 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">11</div>
+      <div class="ptag">Real-World Application</div>
+      <div class="ppts">5 pts</div>
+    </div>
+    <div class="ptext">
+      A satellite dish has a <strong>parabolic cross-section</strong>. The dish is <strong>8 m wide</strong> and <strong>2 m deep</strong>. Placing the vertex at the origin with the parabola opening upward, write the equation of the parabola. Then find the <strong>location of the receiver (focus)</strong>.
+    </div>
+    <div class="work"><div class="work-lbl">Show Your Work</div><div class="wlines">
+      <div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div><div class="wl"></div>
+    </div></div>
+    <div class="ans-row">
+      <span>Equation</span><span>Focus (Receiver location)</span>
+    </div>
+  </div>
+
+  <!-- P12 -->
+  <div class="problem">
+    <div class="prob-top">
+      <div class="pnum">12</div>
+      <div class="ptag">Graphing Sketch</div>
+      <div class="ppts">4 pts</div>
+    </div>
+    <div class="ptext">
+      Sketch a rough graph of the parabola below. Label the <strong>vertex, focus, directrix,</strong> and <strong>axis of symmetry</strong>. Also draw and label the <strong>latus rectum</strong>.
+    </div>
+    <div class="eq">(x + 1)² = −8(y − 3)</div>
+    <div style="border:1.5px solid var(--rule); margin-top:10px; position:relative; height:200px; overflow:hidden;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+        <defs>
+          <pattern id="sg2" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dff0df" stroke-width="0.7"/>
+          </pattern>
+          <pattern id="bg2" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#sg2)"/>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#cce8cc" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#bg2)"/>
+        <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#b8d8b8" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#b8d8b8" stroke-width="1.2" stroke-dasharray="4,3"/>
+      </svg>
+      <div style="position:absolute; bottom:6px; right:9px; font-family:'Courier Prime',monospace; font-size:8.5px; color:#bbd8bb; letter-spacing:.12em;">GRAPH AREA</div>
+    </div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-bar">
+    <div class="slabel">Total Score</div>
+    <div class="sbox">___ / 56</div>
+  </div>
+
+</div>
+</div><!-- end worksheet -->
+
+
+<!-- =========================================================
+     ANSWER KEY
+     ========================================================= -->
+<div class="sheet key-sheet">
+<div class="inner">
+
+  <div class="key-header">
+    <h2>Answer Key &amp; Solutions</h2>
+    <p>Grade 10 — Parabola Practice Worksheet &nbsp;·&nbsp; For teacher / self-evaluation use</p>
+  </div>
+
+  <div class="key-cols">
+
+    <div><!-- LEFT COL -->
+
+      <div class="sol">
+        <div class="sol-num">Problem 1 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">x² = 12y</span></div>
+        <div class="sol-line">4p = 12 → <b>p = 3</b> (positive → opens up)</div>
+        <div class="sol-line"><b>Vertex:</b> (0, 0)</div>
+        <div class="sol-line"><b>Focus:</b> (0, 3)</div>
+        <div class="sol-line"><b>Directrix:</b> y = −3</div>
+        <div class="sol-line"><b>Axis of symmetry:</b> x = 0 (y-axis)</div>
+        <div class="sol-line"><b>Latus rectum length:</b> |4p| = 12</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 2 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">y² = −20x</span></div>
+        <div class="sol-line">4p = −20 → <b>p = −5</b> (opens left)</div>
+        <div class="sol-line"><b>Vertex:</b> (0, 0)</div>
+        <div class="sol-line"><b>Focus:</b> (−5, 0)</div>
+        <div class="sol-line"><b>Directrix:</b> x = 5</div>
+        <div class="sol-line"><b>Latus rectum length:</b> |4p| = 20</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 3 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">(x−3)²=8(y+2)</span></div>
+        <div class="sol-line">4p = 8 → <b>p = 2</b> (opens up)</div>
+        <div class="sol-line"><b>Vertex:</b> (3, −2)</div>
+        <div class="sol-line"><b>Focus:</b> (3, −2+2) = (3, 0)</div>
+        <div class="sol-line"><b>Directrix:</b> y = −2−2 = y = −4</div>
+        <div class="sol-line"><b>Axis of symmetry:</b> x = 3</div>
+        <div class="sol-line"><b>Latus rectum length:</b> 8</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 4 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">(y+4)²=−12(x−1)</span></div>
+        <div class="sol-line">4p = −12 → <b>p = −3</b> (opens left)</div>
+        <div class="sol-line"><b>Vertex:</b> (1, −4)</div>
+        <div class="sol-line"><b>Focus:</b> (1−3, −4) = (−2, −4)</div>
+        <div class="sol-line"><b>Directrix:</b> x = 1+3 = x = 4</div>
+        <div class="sol-line"><b>Axis of symmetry:</b> y = −4</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 5 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">Vertex origin, Focus(0,−4)</span></div>
+        <div class="sol-line">Focus below vertex → opens down · p = −4</div>
+        <div class="sol-line">4p = −16</div>
+        <div class="sol-box">x² = −16y</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 6 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">Vertex(2,5), Directrix y=2</span></div>
+        <div class="sol-line">Directrix below vertex → opens up</div>
+        <div class="sol-line">p = distance from vertex to directrix = 5−2 = 3</div>
+        <div class="sol-line">4p = 12</div>
+        <div class="sol-box">(x − 2)² = 12(y − 5)</div>
+      </div>
+
+    </div><!-- end left col -->
+
+    <div><!-- RIGHT COL -->
+
+      <div class="sol">
+        <div class="sol-num">Problem 7 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">Focus(−1,3), Directrix x=5</span></div>
+        <div class="sol-line">Focus left of directrix → opens left (horizontal parabola)</div>
+        <div class="sol-line">Vertex = midpoint of focus and foot of directrix on axis</div>
+        <div class="sol-line">h = (−1+5)/2 = 2, k = 3 → <b>Vertex: (2, 3)</b></div>
+        <div class="sol-line">p = 2−(−1) = −3 (focus left of vertex) → 4p = −12</div>
+        <div class="sol-box">(y − 3)² = −12(x − 2)</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 8 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">x²−6x−8y+1=0</span></div>
+        <div class="sol-line">(x²−6x) = 8y − 1</div>
+        <div class="sol-line">(x−3)²−9 = 8y−1 → (x−3)² = 8y+8</div>
+        <div class="sol-eq">(x − 3)² = 8(y + 1)</div>
+        <div class="sol-line"><b>Vertex:</b> (3, −1) · p = 2</div>
+        <div class="sol-line"><b>Focus:</b> (3, 1)</div>
+        <div class="sol-line"><b>Directrix:</b> y = −3</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 9 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">y²+10y−4x+9=0</span></div>
+        <div class="sol-line">(y²+10y) = 4x−9</div>
+        <div class="sol-line">(y+5)²−25 = 4x−9 → (y+5)² = 4x+16</div>
+        <div class="sol-eq">(y + 5)² = 4(x + 4)</div>
+        <div class="sol-line"><b>Vertex:</b> (−4, −5) · p = 1 · opens right</div>
+        <div class="sol-line"><b>Focus:</b> (−3, −5)</div>
+        <div class="sol-line"><b>Directrix:</b> x = −5</div>
+        <div class="sol-line"><b>Axis of symmetry:</b> y = −5</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 10</div>
+        <div class="sol-line">(a) <b>TRUE</b> — By definition, vertex is equidistant from focus and directrix, so it is the midpoint.</div>
+        <div class="sol-line">(b) <b>FALSE</b> — A parabola has exactly one axis of symmetry.</div>
+        <div class="sol-line">(c) <b>TRUE</b> — The latus rectum is a chord through the focus perpendicular to the axis.</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 11 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">Satellite Dish</span></div>
+        <div class="sol-line">Dish is 8 m wide → edge point is (4, 2). Vertex at origin.</div>
+        <div class="sol-line">Parabola opens up: x² = 4py. Point (4, 2) lies on it.</div>
+        <div class="sol-line">16 = 4p(2) → 4p = 8 → p = 2</div>
+        <div class="sol-box">x² = 8y</div>
+        <div class="sol-line"><b>Receiver (focus):</b> (0, 2) — 2 m above the vertex</div>
+      </div>
+      <hr class="kdiv">
+
+      <div class="sol">
+        <div class="sol-num">Problem 12 &nbsp;<span style="font-size:11px;color:#aaa;font-family:'Courier Prime',monospace;">(x+1)²=−8(y−3)</span></div>
+        <div class="sol-line">4p = −8 → p = −2 (opens downward)</div>
+        <div class="sol-line"><b>Vertex:</b> (−1, 3)</div>
+        <div class="sol-line"><b>Focus:</b> (−1, 1)</div>
+        <div class="sol-line"><b>Directrix:</b> y = 5</div>
+        <div class="sol-line"><b>Axis of symmetry:</b> x = −1</div>
+        <div class="sol-line"><b>Latus rectum:</b> length 8, endpoints (−5, 1) and (3, 1)</div>
+        <div class="sol-line" style="font-style:italic; color:#999; font-size:11.5px;">Sketch: downward-opening curve, vertex at (−1,3), dotted horizontal directrix at y=5, focus dot at (−1,1), vertical axis line x=−1, horizontal latus rectum segment at y=1.</div>
+      </div>
+
+    </div><!-- end right col -->
+
+  </div><!-- end key-cols -->
+
+</div>
+</div><!-- end answer key -->
+
+</body>
+</html>
