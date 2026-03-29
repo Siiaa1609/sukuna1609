@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complementary & Supplementary Angles Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf8f0;
+    --card: #ffffff;
+    --primary: #f4a023;
+    --primary-light: #fff3d6;
+    --accent: #3b82f6;
+    --accent-light: #dbeafe;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #f4a023 0%, #f97316 100%);
+    color: white;
+    padding: 28px 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 0; right: 0;
+    height: 40px;
+    background: var(--bg);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .header h1 { font-size: 1.9rem; font-weight: 900; letter-spacing: -0.5px; }
+  .header p { font-size: 0.95rem; opacity: 0.9; margin-top: 4px; }
+  .header-meta { display: flex; gap: 24px; margin-top: 14px; flex-wrap: wrap; }
+  .header-meta label { font-size: 0.85rem; opacity: 0.8; display: block; margin-bottom: 2px; }
+  .header-meta input {
+    background: rgba(255,255,255,0.25);
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 5px 12px;
+    width: 180px;
+    outline: none;
+  }
+  .header-meta input::placeholder { color: rgba(255,255,255,0.6); }
+
+  /* Score bar */
+  .score-bar {
+    background: white;
+    border-bottom: 1.5px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--muted);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  }
+  .score-bar span { color: var(--text); }
+  .score-val { color: var(--primary); font-size: 1.1rem; }
+  .btn-check {
+    margin-left: auto;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 22px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-check:hover { background: #d97706; transform: translateY(-1px); }
+  .btn-reset {
+    background: white;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--muted); color: var(--text); }
+
+  /* Main */
+  .main { max-width: 860px; margin: 0 auto; padding: 36px 24px 60px; }
+
+  /* Section titles */
+  .section-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 32px 0 12px;
+    padding-left: 4px;
+  }
+
+  /* Question Card */
+  .q-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .q-card:hover { box-shadow: var(--shadow-hover); }
+
+  .q-num {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 900;
+    border-radius: 8px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .q-num.blue { background: var(--accent); }
+  .q-num.green { background: var(--green); }
+
+  .q-text {
+    font-size: 0.97rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .q-text strong { color: var(--accent); }
+
+  /* Definition box */
+  .def-box {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+
+  /* Checkbox options */
+  .options { display: flex; flex-direction: column; gap: 9px; }
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    font-size: 0.93rem;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .option-label:hover { background: #f8fafc; border-color: #94a3b8; }
+  .option-label input[type="checkbox"],
+  .option-label input[type="radio"] { display: none; }
+  .option-check {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .option-label.radio .option-check { border-radius: 50%; }
+  .option-label input:checked ~ .option-check,
+  .option-label.selected .option-check {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .option-label input:checked ~ .option-check::after,
+  .option-label.selected .option-check::after {
+    content: '';
+    width: 5px; height: 9px;
+    border: 2.5px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg) translate(-1px, -1px);
+    display: block;
+  }
+  .option-label.correct { background: var(--green-light); border-color: var(--green); }
+  .option-label.wrong { background: var(--red-light); border-color: var(--red); }
+  .option-label.missed { background: var(--green-light); border-color: var(--green); opacity: 0.7; }
+
+  /* Fill in blanks */
+  .fill-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.97rem;
+    font-weight: 600;
+    line-height: 2;
+  }
+  .blank {
+    display: inline-block;
+    border: none;
+    border-bottom: 2.5px solid var(--accent);
+    padding: 2px 8px;
+    min-width: 60px;
+    font-family: inherit;
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text);
+    background: transparent;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.15s;
+  }
+  .blank:focus { border-color: var(--primary); }
+  .blank.correct { border-color: var(--green); color: var(--green); }
+  .blank.wrong { border-color: var(--red); color: var(--red); background: var(--red-light); border-radius: 4px; }
+
+  /* Table */
+  .ws-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+    margin-top: 8px;
+  }
+  .ws-table th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 16px;
+    font-weight: 800;
+    text-align: center;
+    font-size: 0.88rem;
+  }
+  .ws-table th:first-child { border-radius: 10px 0 0 0; }
+  .ws-table th:last-child { border-radius: 0 10px 0 0; }
+  .ws-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-weight: 700;
+  }
+  .ws-table tr:last-child td { border-bottom: none; }
+  .ws-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* Drag/sort classify */
+  .classify-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .classify-box {
+    min-height: 90px;
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: flex-start;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .classify-box.over { border-color: var(--accent); background: var(--accent-light); }
+  .classify-box h3 {
+    width: 100%;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .classify-box.comp h3 { color: var(--accent); }
+  .classify-box.supp h3 { color: #7c3aed; }
+
+  .angle-chip {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.83rem;
+    font-weight: 700;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+    white-space: nowrap;
+  }
+  .angle-chip:hover { transform: scale(1.04); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  .angle-chip:active { cursor: grabbing; }
+  .angle-chip.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .angle-chip.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+  .chip-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    min-height: 50px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { color: var(--green); }
+  .feedback.err { color: var(--red); }
+
+  /* Score modal */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 48px;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    animation: popIn 0.3s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal .emoji { font-size: 3.5rem; margin-bottom: 12px; }
+  .modal h2 { font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+  .modal p { font-size: 1rem; color: var(--muted); margin-bottom: 24px; }
+  .modal .score-big { font-size: 2.8rem; font-weight: 900; color: var(--primary); }
+  .modal-btns { display: flex; gap: 12px; justify-content: center; }
+  .modal-btns button {
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 800;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    background: white;
+    transition: all 0.15s;
+  }
+  .modal-btns .primary-btn {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .modal-btns .primary-btn:hover { background: #d97706; }
+
+  @media (max-width: 600px) {
+    .header { padding: 20px 20px 24px; }
+    .main { padding: 24px 16px 40px; }
+    .score-bar { padding: 10px 16px; }
+    .classify-grid { grid-template-columns: 1fr; }
+    .q-card { padding: 18px 16px; }
+    .header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <h1>📐 Complementary & Supplementary Angles</h1>
+    <p>Lines & Angles · Worksheet</p>
+    <div class="header-meta">
+      <div>
+        <label>Student Name</label>
+        <input type="text" placeholder="Enter your name…">
+      </div>
+      <div>
+        <label>Date</label>
+        <input type="date" id="dateInput">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Score bar -->
+<div class="score-bar">
+  <span>Score: <span class="score-val" id="scoreDisplay">–</span></span>
+  <button class="btn-check" onclick="checkAll()">✅ Check Answers</button>
+  <button class="btn-reset" onclick="resetAll()">↺ Reset</button>
+</div>
+
+<div class="main">
+
+  <!-- Q1a -->
+  <div class="section-title">Part 1 · Identifying Complementary Angles</div>
+  <div class="q-card">
+    <span class="q-num">1a</span>
+    <div class="def-box">
+      When the sum of two angles is <strong>90°</strong>, the angles are called <strong>complementary angles</strong>. Each angle is called the <strong>complement</strong> of the other angle.
+    </div>
+    <div class="q-text">Select the pairs of angles that add up to 90° (right angle).</div>
+    <div class="options" id="q1a">
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠AOB and ∠BOC — two rays forming a non-right layout</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠AOB and ∠BOC — obtuse angle layout</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠ABC and ∠PQR — two separate obtuse angles</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠DBA and ∠ABC — angle bisecting a right angle</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠AOB and ∠BOC — shallow angle pair</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠ABC and ∠PQR — two small angles summing to 90°</label>
+    </div>
+    <div class="feedback" id="fb-q1a"></div>
+  </div>
+
+  <!-- Q1b -->
+  <div class="q-card">
+    <span class="q-num">1b</span>
+    <div class="q-text">Select ALL pairs of complementary angles.</div>
+    <div class="options" id="q1b">
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(45°, 45°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(95°, 5°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(90°, 180°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(60°, 30°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(120°, 60°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(1°, 89°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(23°, 67°)</label>
+    </div>
+    <div class="feedback" id="fb-q1b"></div>
+  </div>
+
+  <!-- Q2a -->
+  <div class="section-title">Part 2 · Identifying Supplementary Angles</div>
+  <div class="q-card">
+    <span class="q-num blue">2a</span>
+    <div class="def-box" style="background:#dbeafe; border-color: var(--accent);">
+      When the sum of two angles is <strong>180°</strong>, the angles are called <strong>supplementary angles</strong>. Each angle is called the <strong>supplement</strong> of the other angle.
+    </div>
+    <div class="q-text">Select the pairs of angles that add up to 180°.</div>
+    <div class="options" id="q2a">
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠AOB and ∠BOC — angles on a straight line</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠AOB and ∠BOC — two rays from same point, acute layout</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>Reflex ∠ABC and ∠DEF</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠BAC and ∠DEF — two right angles</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>∠AOB and ∠BOC — acute + acute</label>
+    </div>
+    <div class="feedback" id="fb-q2a"></div>
+  </div>
+
+  <!-- Q2b -->
+  <div class="q-card">
+    <span class="q-num blue">2b</span>
+    <div class="q-text">Select ALL pairs of supplementary angles.</div>
+    <div class="options" id="q2b">
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(60°, 120°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(100°, 10°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(150°, 30°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(90°, 270°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(20°, 70°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>(179°, 1°)</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>(45°, 45°)</label>
+    </div>
+    <div class="feedback" id="fb-q2b"></div>
+  </div>
+
+  <!-- Q3 Classify -->
+  <div class="section-title">Part 3 · Classify the Angle Pairs</div>
+  <div class="q-card">
+    <span class="q-num green">3</span>
+    <div class="q-text">Drag each angle pair into the correct box — <strong>Complementary</strong> (sum = 90°) or <strong>Supplementary</strong> (sum = 180°).</div>
+
+    <div class="classify-grid">
+      <div>
+        <div class="classify-box comp" id="box-comp" ondragover="allowDrop(event)" ondrop="dropChip(event,'comp')">
+          <h3>⊾ Complementary (= 90°)</h3>
+        </div>
+      </div>
+      <div>
+        <div class="classify-box supp" id="box-supp" ondragover="allowDrop(event)" ondrop="dropChip(event,'supp')">
+          <h3>↔ Supplementary (= 180°)</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="chip-pool" id="chip-pool" ondragover="allowDrop(event)" ondrop="dropChip(event,'pool')">
+      <div class="angle-chip" draggable="true" data-val="55+35" data-ans="comp" ondragstart="dragStart(event)">(55°, 35°)</div>
+      <div class="angle-chip" draggable="true" data-val="15+165" data-ans="supp" ondragstart="dragStart(event)">(15°, 165°)</div>
+      <div class="angle-chip" draggable="true" data-val="10+170" data-ans="supp" ondragstart="dragStart(event)">(10°, 170°)</div>
+      <div class="angle-chip" draggable="true" data-val="65+35" data-ans="comp" ondragstart="dragStart(event)">(65°, 35°) ✗</div>
+      <div class="angle-chip" draggable="true" data-val="41+49" data-ans="comp" ondragstart="dragStart(event)">(41°, 49°)</div>
+      <div class="angle-chip" draggable="true" data-val="79+101" data-ans="supp" ondragstart="dragStart(event)">(79°, 101°)</div>
+      <div class="angle-chip" draggable="true" data-val="24+66" data-ans="comp" ondragstart="dragStart(event)">(24°, 66°)</div>
+      <div class="angle-chip" draggable="true" data-val="90+90" data-ans="supp" ondragstart="dragStart(event)">(90°, 90°)</div>
+      <div class="angle-chip" draggable="true" data-val="145+45" data-ans="supp" ondragstart="dragStart(event)">(145°, 45°) ✗</div>
+    </div>
+    <div class="feedback" id="fb-q3"></div>
+  </div>
+
+  <!-- Q4 Fill blanks -->
+  <div class="section-title">Part 4 · Find the Complement / Supplement</div>
+  <div class="q-card">
+    <span class="q-num">4a</span>
+    <div class="q-text">Find the complement of 15°.</div>
+    <div class="fill-row">
+      Since 15° and its complement add up to 90°, the complement will simply be
+      90° − 15° = <input class="blank" type="number" id="q4a" data-ans="75" placeholder="?">°
+    </div>
+    <div class="feedback" id="fb-q4a"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num">4b</span>
+    <div class="q-text">Find the supplement of 70°.</div>
+    <div class="fill-row">
+      Since 70° and its supplement add up to 180°, the supplement will simply be
+      180° − <input class="blank" type="number" id="q4b1" data-ans="70" placeholder="?">°
+      = <input class="blank" type="number" id="q4b2" data-ans="110" placeholder="?">°
+    </div>
+    <div class="feedback" id="fb-q4b"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num">4c</span>
+    <div class="q-text">Fill in both blanks.</div>
+    <div class="fill-row" style="margin-bottom:10px;">
+      (a) The complement of 80° is
+      <input class="blank" type="number" id="q4c1" data-ans="10" placeholder="?">°
+    </div>
+    <div class="fill-row">
+      (b) The supplement of 35° is
+      <input class="blank" type="number" id="q4c2" data-ans="145" placeholder="?">°
+    </div>
+    <div class="feedback" id="fb-q4c"></div>
+  </div>
+
+  <!-- Q5 Table -->
+  <div class="q-card">
+    <span class="q-num green">5</span>
+    <div class="q-text">Write the complement and supplement of each angle given below.</div>
+    <table class="ws-table">
+      <thead>
+        <tr>
+          <th>Angle</th>
+          <th>Its Complement (90° − angle)</th>
+          <th>Its Supplement (180° − angle)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>30°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="60" placeholder="?">°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="150" placeholder="?">°</td>
+        </tr>
+        <tr>
+          <td>45°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="45" placeholder="?">°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="135" placeholder="?">°</td>
+        </tr>
+        <tr>
+          <td>90°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="0" placeholder="?">°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="90" placeholder="?">°</td>
+        </tr>
+        <tr>
+          <td>15°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="75" placeholder="?">°</td>
+          <td><input class="blank" type="number" data-q="q5" data-ans="165" placeholder="?">°</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="feedback" id="fb-q5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="section-title">Part 5 · Angles in Diagrams</div>
+  <div class="q-card">
+    <span class="q-num blue">6a</span>
+    <div class="q-text">∠ABC is a straight angle. ∠ABD = 150°. ∠ABD and ∠DBC are ___ angles.</div>
+    <div class="fill-row">
+      ∠ABD and ∠DBC are
+      <input class="blank" type="text" id="q6a" data-ans="supplementary" placeholder="type here…" style="min-width:160px;">
+      angles.
+    </div>
+    <div class="feedback" id="fb-q6a"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">6b</span>
+    <div class="q-text">Using the diagram from 6a (∠ABC is a straight angle, ∠DBC = 150°), find ∠ABD.</div>
+    <div class="fill-row">
+      ∠ABD = <input class="blank" type="number" id="q6b" data-ans="30" placeholder="?">°
+    </div>
+    <div class="feedback" id="fb-q6b"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num green">7a</span>
+    <div class="q-text">∠ABC is a right angle. ∠ABD = 65°. ∠ABD and ∠DBC are ___ angles.</div>
+    <div class="fill-row">
+      ∠ABD and ∠DBC are
+      <input class="blank" type="text" id="q7a" data-ans="complementary" placeholder="type here…" style="min-width:160px;">
+      angles.
+    </div>
+    <div class="feedback" id="fb-q7a"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num green">7b</span>
+    <div class="q-text">Using the diagram from 7a (∠ABC is a right angle, ∠ABD = 65°), find ∠CBD.</div>
+    <div class="fill-row">
+      ∠CBD = <input class="blank" type="number" id="q7b" data-ans="25" placeholder="?">°
+    </div>
+    <div class="feedback" id="fb-q7b"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="section-title">Part 6 · Reasoning</div>
+  <div class="q-card">
+    <span class="q-num">8</span>
+    <div class="q-text">Suppose ∠A and ∠B are complementary angles. Which of these <em>can</em> be true?</div>
+    <div class="options" id="q8">
+      <label class="option-label radio"><input type="radio" name="q8" data-correct="true"><span class="option-check"></span>Both ∠A and ∠B are acute angles.</label>
+      <label class="option-label radio"><input type="radio" name="q8" data-correct="false"><span class="option-check"></span>Both ∠A and ∠B are obtuse angles.</label>
+      <label class="option-label radio"><input type="radio" name="q8" data-correct="false"><span class="option-check"></span>∠A is an acute angle and ∠B is an obtuse angle.</label>
+      <label class="option-label radio"><input type="radio" name="q8" data-correct="false"><span class="option-check"></span>None of the above</label>
+    </div>
+    <div class="feedback" id="fb-q8"></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">9</span>
+    <div class="q-text">If ∠C and ∠D are supplementary angles, which of these <em>can</em> be true? (Select all that apply)</div>
+    <div class="options" id="q9">
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>Both ∠C and ∠D are acute angles.</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>Both ∠C and ∠D are obtuse angles.</label>
+      <label class="option-label"><input type="checkbox" data-correct="false"><span class="option-check"></span>Only ∠C is a right angle.</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠C is an acute angle and ∠D is an obtuse angle.</label>
+      <label class="option-label"><input type="checkbox" data-correct="true"><span class="option-check"></span>∠C and ∠D can both be right angles.</label>
+    </div>
+    <div class="feedback" id="fb-q9"></div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="emoji" id="modal-emoji">🎉</div>
+    <h2>Worksheet Complete!</h2>
+    <div class="score-big" id="modal-score">–</div>
+    <p id="modal-msg">Great job working through the problems!</p>
+    <div class="modal-btns">
+      <button onclick="closeModal()">Review</button>
+      <button class="primary-btn" onclick="resetAll()">↺ Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Drag & Drop ----
+let dragged = null;
+function dragStart(e) { dragged = e.target; e.dataTransfer.effectAllowed = 'move'; }
+function allowDrop(e) { e.preventDefault(); e.currentTarget.classList.add('over'); }
+function dropChip(e, target) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('over');
+  if (!dragged) return;
+  if (target === 'pool') {
+    document.getElementById('chip-pool').appendChild(dragged);
+  } else if (target === 'comp') {
+    document.getElementById('box-comp').appendChild(dragged);
+  } else if (target === 'supp') {
+    document.getElementById('box-supp').appendChild(dragged);
+  }
+  dragged = null;
+}
+document.querySelectorAll('.classify-box, .chip-pool').forEach(b => {
+  b.addEventListener('dragleave', () => b.classList.remove('over'));
+});
+
+// ---- Option Labels (click toggle) ----
+document.querySelectorAll('.option-label').forEach(label => {
+  label.addEventListener('click', () => {
+    const inp = label.querySelector('input');
+    if (!inp) return;
+    if (inp.type === 'radio') {
+      document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+        r.closest('.option-label').classList.remove('selected');
+      });
+      inp.checked = true;
+      label.classList.add('selected');
+    } else {
+      inp.checked = !inp.checked;
+      label.classList.toggle('selected', inp.checked);
+    }
+  });
+});
+
+// ---- Check All ----
+let totalScore = 0, totalMax = 0;
+
+function checkAll() {
+  totalScore = 0; totalMax = 0;
+  checkMCQ('q1a'); checkMCQ('q1b');
+  checkMCQ('q2a'); checkMCQ('q2b');
+  checkClassify();
+  checkBlank('q4a','fb-q4a');
+  checkMultiBlanks(['q4b1','q4b2'],'fb-q4b');
+  checkMultiBlanks(['q4c1','q4c2'],'fb-q4c');
+  checkTableQ5();
+  checkTextBlank('q6a','supplementary','fb-q6a');
+  checkBlank('q6b','fb-q6b');
+  checkTextBlank('q7a','complementary','fb-q7a');
+  checkBlank('q7b','fb-q7b');
+  checkMCQ('q8');
+  checkMCQ('q9');
+
+  document.getElementById('scoreDisplay').textContent = `${totalScore}/${totalMax}`;
+  showModal();
+}
+
+function checkMCQ(id) {
+  const container = document.getElementById(id);
+  const labels = container.querySelectorAll('.option-label');
+  let correct = true;
+  labels.forEach(label => {
+    const inp = label.querySelector('input');
+    const isCorrect = inp.dataset.correct === 'true';
+    const isChecked = inp.checked;
+    label.classList.remove('correct','wrong','missed');
+    if (isChecked && isCorrect) { label.classList.add('correct'); }
+    else if (isChecked && !isCorrect) { label.classList.add('wrong'); correct = false; }
+    else if (!isChecked && isCorrect) { label.classList.add('missed'); correct = false; }
+  });
+  totalMax++;
+  if (correct) totalScore++;
+  const fb = document.getElementById('fb-' + id);
+  if (fb) { fb.className = 'feedback show ' + (correct ? 'ok' : 'err'); fb.textContent = correct ? '✓ Correct!' : '✗ Review the highlighted options.'; }
+}
+
+function checkBlank(id, fbId) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const ans = parseInt(el.dataset.ans);
+  const val = parseInt(el.value);
+  el.classList.remove('correct','wrong');
+  totalMax++;
+  if (val === ans) { el.classList.add('correct'); totalScore++; showFb(fbId, true); }
+  else { el.classList.add('wrong'); showFb(fbId, false); }
+}
+
+function checkTextBlank(id, ans, fbId) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const val = el.value.trim().toLowerCase();
+  el.classList.remove('correct','wrong');
+  totalMax++;
+  if (val === ans.toLowerCase()) { el.classList.add('correct'); totalScore++; showFb(fbId, true); }
+  else { el.classList.add('wrong'); showFb(fbId, false, `Hint: answer is "${ans}"`); }
+}
+
+function checkMultiBlanks(ids, fbId) {
+  let allCorrect = true;
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const ans = parseInt(el.dataset.ans);
+    const val = parseInt(el.value);
+    el.classList.remove('correct','wrong');
+    if (val === ans) el.classList.add('correct');
+    else { el.classList.add('wrong'); allCorrect = false; }
+  });
+  totalMax++;
+  if (allCorrect) totalScore++;
+  showFb(fbId, allCorrect);
+}
+
+function checkTableQ5() {
+  const blanks = document.querySelectorAll('[data-q="q5"]');
+  let allCorrect = true;
+  blanks.forEach(el => {
+    const ans = parseInt(el.dataset.ans);
+    const val = parseInt(el.value);
+    el.classList.remove('correct','wrong');
+    if (val === ans) el.classList.add('correct');
+    else { el.classList.add('wrong'); allCorrect = false; }
+  });
+  totalMax++;
+  if (allCorrect) totalScore++;
+  showFb('fb-q5', allCorrect);
+}
+
+function checkClassify() {
+  const compBox = document.getElementById('box-comp');
+  const suppBox = document.getElementById('box-supp');
+  let correct = true;
+  compBox.querySelectorAll('.angle-chip').forEach(chip => {
+    chip.classList.remove('correct','wrong');
+    if (chip.dataset.ans === 'comp') chip.classList.add('correct');
+    else { chip.classList.add('wrong'); correct = false; }
+  });
+  suppBox.querySelectorAll('.angle-chip').forEach(chip => {
+    chip.classList.remove('correct','wrong');
+    if (chip.dataset.ans === 'supp') chip.classList.add('correct');
+    else { chip.classList.add('wrong'); correct = false; }
+  });
+  // also chips still in pool count as wrong
+  document.querySelectorAll('#chip-pool .angle-chip').forEach(() => { correct = false; });
+  totalMax++;
+  if (correct) totalScore++;
+  showFb('fb-q3', correct);
+}
+
+function showFb(id, ok, extra='') {
+  const fb = document.getElementById(id);
+  if (!fb) return;
+  fb.className = 'feedback show ' + (ok ? 'ok' : 'err');
+  fb.textContent = ok ? '✓ Correct!' : ('✗ Some answers are incorrect. ' + extra);
+}
+
+function showModal() {
+  const pct = Math.round((totalScore / totalMax) * 100);
+  document.getElementById('modal-score').textContent = `${totalScore} / ${totalMax}`;
+  const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🎉' : pct >= 50 ? '📚' : '💪';
+  document.getElementById('modal-emoji').textContent = emoji;
+  const msg = pct >= 90 ? 'Excellent! You mastered this topic!' : pct >= 70 ? 'Great job! Review the missed ones.' : pct >= 50 ? 'Good effort! Keep practicing.' : 'Keep going — you\'ve got this!';
+  document.getElementById('modal-msg').textContent = msg;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal() { document.getElementById('modal').classList.remove('show'); }
+
+function resetAll() {
+  closeModal();
+  document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(i => { i.checked = false; });
+  document.querySelectorAll('.option-label').forEach(l => l.classList.remove('correct','wrong','missed','selected'));
+  document.querySelectorAll('.blank').forEach(b => { b.value = ''; b.classList.remove('correct','wrong'); });
+  document.querySelectorAll('.angle-chip').forEach(chip => {
+    chip.classList.remove('correct','wrong');
+    document.getElementById('chip-pool').appendChild(chip);
+  });
+  document.querySelectorAll('.feedback').forEach(f => f.classList.remove('show'));
+  document.getElementById('scoreDisplay').textContent = '–';
+}
+
+// Set today's date
+document.getElementById('dateInput').valueAsDate = new Date();
+</script>
+</body>
+</html>
